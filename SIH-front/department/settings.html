@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 dark:from-gray-900 dark:to-gray-800 px-6 py-5 shadow-md">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-white">Department <span class="text-yellow-200 dark:text-green-400">Settings</span></h1>
+        <p class="text-sm text-blue-100 dark:text-gray-400">System Configuration & Preferences</p>
+      </div>
+      <div class="flex space-x-5 items-center text-white">
+        <button onclick="location.href='dashboard.html'">🏠</button>
+        <button class="relative">🔔<span class="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">2</span></button>
+        <button onclick="location.href='settings.html'">⚙️</button>
+        <button onclick="toggleDarkMode()" id="themeToggle">🌙</button>
+        <button onclick="location.href='profile.html'">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="p-6 space-y-6">
+
+    <!-- System Status -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+      <h2 class="font-semibold mb-4">System Status</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-lg border bg-green-50 dark:bg-green-900">
+          <p class="font-medium">Database Connection</p>
+          <p class="text-green-600 dark:text-green-400 text-sm">Connected</p>
+        </div>
+        <div class="p-4 rounded-lg border bg-green-50 dark:bg-green-900">
+          <p class="font-medium">API Services</p>
+          <p class="text-green-600 dark:text-green-400 text-sm">Operational</p>
+        </div>
+        <div class="p-4 rounded-lg border bg-yellow-50 dark:bg-yellow-900">
+          <p class="font-medium">Mobile App Sync</p>
+          <p class="text-yellow-600 dark:text-yellow-400 text-sm">Syncing</p>
+        </div>
+        <div class="p-4 rounded-lg border bg-green-50 dark:bg-green-900">
+          <p class="font-medium">External Integrations</p>
+          <p class="text-green-600 dark:text-green-400 text-sm">Connected</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Left column -->
+      <div class="space-y-6 lg:col-span-2">
+
+        <!-- Profile Settings -->
+        <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+          <h2 class="font-semibold mb-4">Profile Settings</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="text-sm">Display Name</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="John Davidson"></div>
+            <div><label class="text-sm">Email Address</label><input type="email" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="jdavidson@publicworks.gov"></div>
+            <div><label class="text-sm">Phone Number</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="+1 (555) 123-4567"></div>
+            <div><label class="text-sm">Department</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="Public Works & Infrastructure"></div>
+            <div><label class="text-sm">Time Zone</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="Eastern Time (ET)"></div>
+          </div>
+        </section>
+
+        <!-- Notification Preferences -->
+        <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+          <h2 class="font-semibold mb-4">Notification Preferences</h2>
+          <ul class="space-y-4">
+            <li class="flex justify-between items-center"><span>Email Notifications</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" checked class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div></label></li>
+            <li class="flex justify-between items-center"><span>SMS Alerts</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div></label></li>
+            <li class="flex justify-between items-center"><span>Desktop Notifications</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" checked class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div></label></li>
+            <li class="flex justify-between items-center"><span>Weekly Reports</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" checked class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div></label></li>
+            <li class="flex justify-between items-center"><span>System Maintenance</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" class="sr-only peer"><div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div></label></li>
+          </ul>
+        </section>
+
+        <!-- Security & Privacy -->
+        <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+          <h2 class="font-semibold mb-4">Security & Privacy</h2>
+          <ul class="space-y-4">
+            <li class="flex justify-between"><span>Two-Factor Authentication</span><span class="text-green-500">Enabled</span></li>
+            <li class="flex justify-between"><span>Session Timeout</span><span class="text-gray-500">30 minutes</span></li>
+            <li class="flex justify-between"><span>Login History</span><a href="#" class="text-blue-500 hover:underline">View Recent Logins</a></li>
+            <li class="flex justify-between"><span>Data Export</span><a href="#" class="text-blue-500 hover:underline">Request Data Export</a></li>
+            <li class="flex justify-between"><span>Account Deletion</span><a href="#" class="text-red-500 hover:underline">Delete Account</a></li>
+          </ul>
+        </section>
+
+        <!-- System Preferences -->
+        <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+          <h2 class="font-semibold mb-4">System Preferences</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="text-sm">Auto-Save Interval</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="5 minutes"></div>
+            <div><label class="text-sm">Data Refresh Rate</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="Real-time"></div>
+            <div><label class="text-sm">Export Format</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="PDF"></div>
+            <div><label class="text-sm">Date Format</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="MM/DD/YYYY"></div>
+            <div><label class="text-sm">Number Format</label><input type="text" class="w-full mt-1 px-3 py-2 border rounded-lg dark:bg-gray-700" value="US (1,234.56)"></div>
+          </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-4">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Save Changes</button>
+          <button class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600">Reset to Defaults</button>
+          <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Export Settings</button>
+          <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">Import Settings</button>
+        </div>
+
+      </div>
+
+      <!-- Right column: Recent Changes -->
+      <aside class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+        <h2 class="font-semibold mb-4">Recent Changes</h2>
+        <ul class="space-y-4 text-sm">
+          <li><span class="text-blue-500">Email Notifications</span> – Enabled<br><span class="text-gray-500 text-xs">2 hours ago</span></li>
+          <li><span class="text-blue-500">Session Timeout</span> – Changed to 30 minutes<br><span class="text-gray-500 text-xs">1 day ago</span></li>
+          <li><span class="text-blue-500">Two-Factor Authentication</span> – Enabled<br><span class="text-gray-500 text-xs">3 days ago</span></li>
+          <li><span class="text-blue-500">Data Refresh Rate</span> – Set to Real-time<br><span class="text-gray-500 text-xs">1 week ago</span></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-500 dark:text-gray-400">
+    &copy; 2025 Department Dashboard. All rights reserved.
+  </footer>
+
+  <!-- Dark mode toggle -->
+  <script>
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        btn.textContent = '🌙';
+      } else {
+        html.classList.add('dark');
+        btn.textContent = '🌞';
+      }
+    }
+  </script>
+</body>
+</html>

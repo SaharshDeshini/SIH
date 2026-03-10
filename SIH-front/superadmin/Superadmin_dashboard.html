@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+  <style>
+    #issueMap { height: 400px; width: 100%; margin-top: 1rem; border-radius: 0.5rem; }
+  </style>
+</head>
+<body class="bg-gray-300 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 dark:from-gray-900 dark:to-gray-800 px-6 py-5 shadow-md transition-all duration-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">
+          Super <span class="text-yellow-200 dark:text-green-400">Admin Dashboard</span>
+        </h1>
+        <p class="text-sm text-blue-100 dark:text-gray-400">System monitoring & management</p>
+      </div>
+      <div class="flex space-x-5 items-center text-white dark:text-gray-200">
+        <button class="relative hover:scale-110 transition-transform duration-300">🔔<span class="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs" id="notificationCount">0</span></button>
+        <button class="hover:scale-110 transition-transform duration-300">⚙</button>
+        <button onclick="toggleDarkMode()" id="themeToggle" class="hover:scale-110 transition-transform duration-300">🌙</button>
+        <button class="hover:scale-110 transition-transform duration-300">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="p-6 space-y-6">
+    <!-- Stats Cards -->
+    <section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex items-start justify-between">
+        <div>
+          <h4 class="text-sm text-gray-500 dark:text-gray-400">Total Issues</h4>
+          <p class="text-2xl font-bold text-gray-800 dark:text-white"><span id="totalIssuesCount">0</span></p>
+        </div>
+        <div class="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 p-2 rounded-full">⚠</div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex items-start justify-between">
+        <div>
+          <h4 class="text-sm text-gray-500 dark:text-gray-400">Critical</h4>
+          <p class="text-2xl font-bold text-red-500"><span id="criticalCount">0</span></p>
+        </div>
+        <div class="bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 p-2 rounded-full">🔴</div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex items-start justify-between">
+        <div>
+          <h4 class="text-sm text-gray-500 dark:text-gray-400">Warning</h4>
+          <p class="text-2xl font-bold text-yellow-500"><span id="warningCount">0</span></p>
+        </div>
+        <div class="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300 p-2 rounded-full">🟡</div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex items-start justify-between">
+        <div>
+          <h4 class="text-sm text-gray-500 dark:text-gray-400">Resolved</h4>
+          <p class="text-2xl font-bold text-green-500"><span id="resolvedCount">0</span></p>
+        </div>
+        <div class="bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 p-2 rounded-full">✔</div>
+      </div>
+    </section>
+
+    <!-- Google Map -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <h2 class="font-semibold text-lg mb-4 text-gray-800 dark:text-gray-100">Issue Locations</h2>
+      <div id="issueMap"></div>
+    </section>
+
+    <!-- Issues Table -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+      <div class="flex justify-between items-center mb-4 px-4 lg:px-8">
+        <h2 class="font-semibold text-lg">Issues Table</h2>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">New Issue</button>
+      </div>
+      <div class="overflow-x-auto px-4 lg:px-8">
+        <table class="min-w-full table-auto text-left">
+          <thead class="text-gray-600 dark:text-gray-300">
+            <tr>
+              <th class="py-2">ID</th>
+              <th>Department</th>
+              <th>Severity</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Assignee</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm" id="issuesTableBody">
+            <!-- Dynamic rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 lg:p-6">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm flex flex-col items-center">
+        <h2 class="font-semibold text-lg mb-4 text-gray-800 dark:text-gray-100">Issues by Category</h2>
+        <canvas id="pieChart" class="w-64 h-64"></canvas>
+      </div>
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm flex flex-col items-center">
+        <h2 class="font-semibold text-lg mb-4 text-gray-800 dark:text-gray-100">Issues Over Time</h2>
+        <canvas id="lineChart" class="w-full max-w-md"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="text-center p-4 mt-10 text-gray-500 dark:text-gray-400">
+    &copy; 2025 Super Admin Dashboard. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Google Maps API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArMM9lWBBGqnMd5j8Bm3jPqUT8MSraGL4"></script>
+
+  <script type="module">
+    const BASE_URL = 'http://localhost:5000'; // your backend URL
+    const issuesTableBody = document.getElementById('issuesTableBody');
+    const totalIssuesEl = document.getElementById('totalIssuesCount');
+    const criticalEl = document.getElementById('criticalCount');
+    const warningEl = document.getElementById('warningCount');
+    const resolvedEl = document.getElementById('resolvedCount');
+
+// Initialize map only once
+let map;
+let markers = []; // store all markers globally
+
+window.initMap = async function() {
+  map = new google.maps.Map(document.getElementById('issueMap'), {
+    center: { lat: 17.385044, lng: 78.486671 },
+    zoom: 13,
+  });
+
+  await fetchIssues(); // load issues & markers
+};
+
+async function fetchIssues() {
+  try {
+    const res = await fetch(`${BASE_URL}/issues`);
+    const issues = await res.json();
+
+    // Reset stats
+    let critical = 0, warning = 0, resolved = 0;
+
+    // Clear table
+    issuesTableBody.innerHTML = '';
+
+    // Clear previous markers from map
+    markers.forEach(m => m.setMap(null));
+    markers = [];
+
+    // Fill table & add markers
+    issues.forEach(issue => {
+      // Table row
+      const tr = document.createElement('tr');
+      tr.className = 'border-t border-gray-200 dark:border-gray-700';
+      tr.innerHTML = `
+        <td class="py-3">${issue.id}</td>
+        <td class="py-3">${issue.department}</td>
+        <td class="py-3"><span class="px-2 py-1 rounded text-xs ${issue.emergency==='critical'?'bg-red-500 text-white':issue.emergency==='warning'?'bg-yellow-500 text-white':'bg-green-500 text-white'}">${issue.emergency}</span></td>
+        <td class="py-3"><span class="px-2 py-1 rounded text-xs ${issue.status==='completed'?'bg-green-400':'bg-blue-400'}">${issue.status}</span></td>
+        <td class="py-3">${new Date(issue.timestamp.seconds*1000).toLocaleDateString()}</td>
+        <td class="py-3">${issue.assignedWorker||'Unassigned'}</td>
+        <td class="py-3">⋮</td>
+      `;
+      issuesTableBody.appendChild(tr);
+
+      // Stats
+      if(issue.emergency==='critical') critical++;
+      if(issue.emergency==='warning') warning++;
+      if(issue.status==='completed') resolved++;
+
+      // Map marker
+      if(issue.location && issue.location.lat && issue.location.lng){
+        const marker = new google.maps.Marker({
+          position: { lat: issue.location.lat, lng: issue.location.lng },
+          map: map,
+          title: issue.department,
+          icon: getMarkerIcon(issue.emergency)
+        });
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<strong>${issue.department}</strong><br>Status: ${issue.status}<br>Severity: ${issue.emergency}`
+        });
+        marker.addListener('click', () => infoWindow.open(map, marker));
+        markers.push(marker); // store marker globally
+      }
+    });
+
+    totalIssuesEl.textContent = issues.length;
+    criticalEl.textContent = critical;
+    warningEl.textContent = warning;
+    resolvedEl.textContent = resolved;
+
+    updateCharts(issues);
+
+  } catch(err) {
+    console.error('Error fetching issues:', err);
+  }
+}
+
+    function getMarkerIcon(severity){
+      switch(severity){
+        case 'critical': return "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        case 'warning': return "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        case 'resolved': return "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        default: return "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+      }
+    }
+
+    function updateCharts(issues) {
+      const categoryCount = {};
+      const timeCount = {};
+      issues.forEach(issue=>{
+        categoryCount[issue.department] = (categoryCount[issue.department]||0)+1;
+        const month = new Date(issue.timestamp.seconds*1000).toLocaleString('default',{month:'short'});
+        timeCount[month] = (timeCount[month]||0)+1;
+      });
+
+      // Pie Chart
+      const pieCtx = document.getElementById('pieChart').getContext('2d');
+      if(window.pieChartInstance) window.pieChartInstance.destroy();
+      window.pieChartInstance = new Chart(pieCtx,{
+        type:'pie',
+        data:{
+          labels: Object.keys(categoryCount),
+          datasets:[{
+            data: Object.values(categoryCount),
+            backgroundColor: ['#3B82F6','#10B981','#FACC15','#EF4444','#8B5CF6','#F472B6'],
+            borderColor:'#fff',
+            borderWidth:2
+          }]
+        },
+        options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+      });
+
+      // Line Chart
+      const lineCtx = document.getElementById('lineChart').getContext('2d');
+      if(window.lineChartInstance) window.lineChartInstance.destroy();
+      window.lineChartInstance = new Chart(lineCtx,{
+        type:'line',
+        data:{
+          labels:Object.keys(timeCount),
+          datasets:[{
+            label:'Open Issues',
+            data:Object.values(timeCount),
+            fill:false,
+            borderColor:'rgba(59,130,246,0.8)',
+            tension:0.3
+          }]
+        },
+        options:{responsive:true,scales:{y:{beginAtZero:true}}}
+      });
+    }
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const toggleBtn = document.getElementById('themeToggle');
+      if(html.classList.contains('dark')){
+        html.classList.remove('dark'); toggleBtn.textContent='🌙';
+      } else {
+        html.classList.add('dark'); toggleBtn.textContent='🌞';
+      }
+    }
+
+    // Initialize map and fetch issues on page load
+    window.addEventListener('load', () => {
+      initMap();
+      fetchIssues();
+    });
+  </script>
+</body>
+</html>

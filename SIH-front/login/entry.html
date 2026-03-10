@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NagarSeva - Snap. Report. Resolve.</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #222;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Background image for full page with opacity */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("./image.jpg") no-repeat center center / cover;
+       /* 60% opacity */
+      z-index: -1;   /* Behind all content */
+    }
+
+    html {
+      scroll-behavior: smooth; /* Smooth scroll effect */
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.9); /* semi-transparent so bg is visible */
+      position: sticky;
+      top: 0;
+      border-bottom: 1px solid #eee;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #0078d7;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: 1px solid #333;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 14px;
+      color: #333;
+      background: #fff;
+    }
+
+    .btn:hover {
+      background: #0078d7;
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: rgba(0, 0, 0, 0.5); /* dark overlay for text contrast */
+      color: white;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .hero .btn-primary {
+      background: white;
+      color: #0072ff;
+      border: none;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 80px 60px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85); /* white tint for readability */
+      border-radius: 10px;
+      margin: 20px;
+    }
+
+    .section h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .card {
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: #fff;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 60px;
+      background: rgba(247, 247, 247, 0.9);
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(34, 34, 34, 0.9);
+      color: #fff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NagarSeva</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#demo">Demo</a>
+      <a href="./login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Snap. Report. Resolve.</h2>
+    <p>A smarter way to fix your city's civic issues in seconds.</p>
+    <a href="#demo" class="btn btn-primary">Try Demo</a>
+  </section>
+   
+  <section id="how" class="section">
+    <h3>How It Works</h3>
+    <p>From problem to solution in four simple steps</p>
+    <div class="grid">
+      <div class="card">
+        <h4>📸 Snap Photo</h4>
+        <p>Take a picture of the civic issue you want to report</p>
+      </div>
+      <div class="card">
+        <h4>📍 Submit + Auto Location</h4>
+        <p>Submit instantly with automatic GPS location detection</p>
+      </div>
+      <div class="card">
+        <h4>👨‍💼 Admin Assigns</h4>
+        <p>Local authorities receive and assign the issue to workers</p>
+      </div>
+      <div class="card">
+        <h4>🔧 Worker Fixes</h4>
+        <p>Issue gets resolved with progress updates to citizens</p>
+      </div>
+    </div>
+  </section>
+   
+  <section id="features" class="section">
+    <h3>Powerful Features</h3>
+    <p>Built for communities, designed for impact</p>
+    <div class="grid">
+      <div class="card">
+        <h4>🤝 Community Support</h4>
+        <p>Citizens can upvote issues to prioritize what matters most.</p>
+      </div>
+      <div class="card">
+        <h4>🗣 Multi-Language & Voice</h4>
+        <p>Report in your preferred language with voice-to-text support.</p>
+      </div>
+      <div class="card">
+        <h4>🗺 Map-Based Transparency</h4>
+        <p>Track all issues on an interactive map with real-time status.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo" class="section">
+    <h3>See It In Action</h3>
+    <p>Citizen app and admin dashboard working together</p>
+    <div class="grid">
+      <div class="card">
+        <h4>📱 Citizen App</h4>
+        <p>Report & Track Issues</p>
+      </div>
+      <div class="card">
+        <h4>💻 Admin Dashboard</h4>
+        <p>Manage & Assign Tasks</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>Be the change. Start reporting civic issues today.</h3>
+    <p>Join thousands of citizens making their communities better, one report at a time.</p>
+    <a href="./login.html" class="btn btn-primary">Get Started</a>
+  </section>
+
+  <footer>
+    <p>🌆 CivicConnect | नगरसेवा (NagarSeva) — Making cities better, one report at a time.</p>
+  </footer>
+</body>
+</html>

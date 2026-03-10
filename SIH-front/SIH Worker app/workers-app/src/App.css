@@ -1,0 +1,205 @@
+/* --- Global Styles & Variables --- */
+:root {
+  --background-blur: 10px;
+  --card-background: rgba(255, 255, 255, 0.6);
+  --card-border: 1px solid rgba(255, 255, 255, 0.2);
+  --border-radius: 16px;
+  --text-dark: #2c3e50;
+  --text-light: #ffffff;
+  --primary-accent: #34495e;
+  --primary-accent-light: #4a627a;
+  --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-dark);
+}
+
+/* --- App Container & Background --- */
+.app-container {
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+  /* IMPORTANT: Replace this URL with your own background image.
+    I've used a placeholder from Unsplash.
+  */
+  background-image: url('./assets/image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* --- Loading & Error States --- */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #2c3e50;
+}
+.loading-box {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2rem 4rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  color: var(--text-light);
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
+/* --- Header --- */
+.app-header {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card-background);
+  backdrop-filter: blur(var(--background-blur));
+  -webkit-backdrop-filter: blur(var(--background-blur));
+  border-radius: var(--border-radius);
+  border: var(--card-border);
+  box-shadow: var(--shadow-light);
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* --- Navigation Buttons --- */
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  background: var(--card-background);
+  backdrop-filter: blur(var(--background-blur));
+  -webkit-backdrop-filter: blur(var(--background-blur));
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-light);
+}
+
+.nav-buttons button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-buttons button.active {
+  background-color: var(--primary-accent);
+  color: var(--text-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-buttons button:not(.active):hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Main Content & Task Grid --- */
+.content-area {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Task Card Styling --- */
+.task-card {
+  background: rgba(249, 250, 251, 0.75);
+  backdrop-filter: blur(var(--background-blur));
+  -webkit-backdrop-filter: blur(var(--background-blur));
+  border-radius: var(--border-radius);
+  border: var(--card-border);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.task-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--primary-accent);
+}
+
+.task-description {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+  min-height: 2.5rem; /* Ensures cards have similar height */
+}
+
+.task-image-placeholder {
+  background-color: rgba(229, 231, 235, 0.7);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-weight: 500;
+  border: 2px dashed #d1d5db;
+}
+
+.task-map-container {
+    border-radius: 8px;
+    overflow: hidden; /* Ensures the iframe corners are rounded */
+}
+
+.task-status {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.start-task-btn {
+  background-color: var(--primary-accent);
+  color: var(--text-light);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.start-task-btn:hover {
+  background-color: var(--primary-accent-light);
+}

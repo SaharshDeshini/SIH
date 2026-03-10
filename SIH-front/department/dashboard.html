@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Department Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: 'class' } </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans transition-colors duration-300">
+
+  <!-- Navbar -->
+  <header class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 dark:from-gray-900 dark:to-gray-800 px-6 py-5 shadow-md">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-white">Department <span class="text-yellow-200 dark:text-green-400">Dashboard</span></h1>
+        <p class="text-sm text-blue-100 dark:text-gray-400">Civic Issues Reporting System</p>
+      </div>
+      <div class="flex space-x-5 items-center text-white">
+        <button class="relative">🔔<span class="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">3</span></button>
+        <button onclick="location.href='settings.html'">⚙️</button>
+        <button onclick="toggleDarkMode()" id="themeToggle">🌙</button>
+        <button onclick="location.href='profile.html'">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="p-6 space-y-6">
+    <!-- Department Title -->
+    <h2 id="deptTitle" class="text-2xl font-bold mb-4">Loading Department...</h2>
+
+    <!-- Top Stats -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow border hover:shadow-lg transition duration-300">
+        <h4 class="text-sm text-gray-500 dark:text-gray-400">Active Issues</h4>
+        <p class="text-2xl font-bold" id="activeIssues">0 <span class="text-red-500 text-sm">+20%</span></p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow border hover:shadow-lg transition duration-300">
+        <h4 class="text-sm text-gray-500 dark:text-gray-400">Resolved Issues</h4>
+        <p class="text-2xl font-bold" id="resolvedIssues">0 <span class="text-green-600 text-sm">+25%</span></p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow border hover:shadow-lg transition duration-300">
+        <h4 class="text-sm text-gray-500 dark:text-gray-400">Alerts</h4>
+        <p class="text-2xl font-bold">8 <span class="text-red-500 text-sm">-12%</span></p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow border hover:shadow-lg transition duration-300">
+        <h4 class="text-sm text-gray-500 dark:text-gray-400">SLA Compliance</h4>
+        <p class="text-2xl font-bold">94% <span class="text-green-600 text-sm">+2.5%</span></p>
+      </div>
+    </section>
+
+    <!-- Map + Workers -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border lg:col-span-2">
+        <h2 class="font-semibold mb-2">Department Map</h2>
+        <div id="map" class="h-64 rounded-lg bg-gray-200 dark:bg-gray-700"></div>
+      </div>
+
+      <!-- Active Workers Table -->
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border">
+        <h2 class="font-semibold mb-4">Active Workers</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full table-auto text-left rounded-lg overflow-hidden">
+            <thead class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 text-white">
+              <tr>
+                <th class="px-4 py-3">Name</th>
+                <th class="px-4 py-3">Role</th>
+                <th class="px-4 py-3">Tasks</th>
+                <th class="px-4 py-3">Efficiency</th>
+                <th class="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm" id="workersTableBody">
+              <!-- Workers will be inserted dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Issues Table -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="font-semibold text-lg">Active Issues</h2>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">New Issue</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-left rounded-lg overflow-hidden">
+          <thead class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 text-white">
+            <tr>
+              <th class="px-4 py-3">ID</th>
+              <th class="px-4 py-3">Description</th>
+              <th class="px-4 py-3">Severity</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3">Assignee</th>
+              <th class="px-4 py-3">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm" id="issuesTableBody">
+            <!-- Issues will be inserted dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Worker Performance Table -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border">
+      <h2 class="font-semibold mb-4">Worker Performance</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-auto text-left rounded-lg overflow-hidden">
+          <thead class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 text-white">
+            <tr>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Assigned Tasks</th>
+              <th class="px-4 py-3">Completed Tasks</th>
+              <th class="px-4 py-3">Avg Time</th>
+              <th class="px-4 py-3">Efficiency</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm" id="workerPerformanceBody">
+            <!-- Perf rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-500 dark:text-gray-400">
+    &copy; 2025 Action Minds. All rights reserved.
+  </footer>
+
+  <!-- Tailwind custom keyframes for smooth bar animation -->
+  <style>
+    @keyframes grow { from { width: 0; } }
+  </style>
+
+  <!-- Firebase compat SDKs (keeps your existing firebase.* code working) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <!-- Main JS: only JS changed/added (no style changes) -->
+  <script>
+    // ---------- config ----------
+    const firebaseConfig = {
+      apiKey: "AIzaSyD45ITDmMxUY7U0fdgFPUaoOoWsx1YoTFI",
+      authDomain: "si-h-9f3e3.firebaseapp.com",
+      projectId: "si-h-9f3e3",
+      storageBucket: "si-h-9f3e3.firebasestorage.app",
+      messagingSenderId: "805584768570",
+      appId: "1:805584768570:web:effa642af8bf47274caf03",
+      measurementId: "G-2CLZB0Z3MZ"
+    };
+
+    // Init firebase (compat)
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Globals
+    let deptId = null;
+    let deptDoc = null;
+    let map = null;
+    let markers = [];
+
+    // Toggle dark mode (keeps your UI)
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      if (html.classList.contains('dark')) { html.classList.remove('dark'); btn.textContent = '🌙'; }
+      else { html.classList.add('dark'); btn.textContent = '🌞'; }
+    }
+    window.toggleDarkMode = toggleDarkMode;
+
+    // Safe lat/lng extractor (handles various shapes)
+    function extractLatLng(issue) {
+      try {
+        if (!issue) return null;
+        const loc = issue.location || issue.Location || issue.geo || null;
+        if (loc) {
+          if (typeof loc.lat === 'number' && typeof loc.lng === 'number') return { lat: loc.lat, lng: loc.lng };
+          if (typeof loc.latitude === 'number' && typeof loc.longitude === 'number') return { lat: loc.latitude, lng: loc.longitude };
+          // Firestore GeoPoint: .latitude/.longitude
+          if (loc._latitude !== undefined && loc._longitude !== undefined) return { lat: loc._latitude, lng: loc._longitude };
+          if (Array.isArray(loc.coordinates) && loc.coordinates.length >= 2) return { lat: Number(loc.coordinates[1]), lng: Number(loc.coordinates[0]) };
+        }
+        if (typeof issue.lat === 'number' && typeof issue.lng === 'number') return { lat: issue.lat, lng: issue.lng };
+      } catch (e) { console.warn('extractLatLng', e); }
+      return null;
+    }
+
+    function clearMarkers() {
+      markers.forEach(m => m.setMap(null));
+      markers = [];
+    }
+
+    function addMarker(pos, title, severity, html) {
+      if (!map || !pos) return;
+      const icon = (severity || '').toLowerCase();
+      const iconUrl = icon.includes('crit') || icon.includes('high') ? 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    : icon.includes('med') || icon.includes('warn') ? 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                    : 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+      const marker = new google.maps.Marker({ position: pos, map, title: title || '', icon: iconUrl });
+      if (html) {
+        const infow = new google.maps.InfoWindow({ content: html });
+        marker.addListener('click', () => infow.open(map, marker));
+      }
+      markers.push(marker);
+      return marker;
+    }
+
+    // initMap must be global since Google uses callback=initMap
+    window.initMap = function () {
+      // default center (Hyderabad)
+      const center = { lat: 17.385044, lng: 78.486671 };
+      map = new google.maps.Map(document.getElementById('map'), { center, zoom: 12 });
+      // Wait for auth; auth listener will trigger data load (below)
+    };
+
+    // Auth state: when user is logged in, resolve deptId from users doc
+    function initAfterLogin() {
+      auth.onAuthStateChanged(async (user) => {
+        if (!user) {
+          console.warn('Not logged in — redirecting to login.html');
+          // If you want to force login, uncomment the next line:
+          // window.location.href = 'login.html';
+          document.getElementById('deptTitle').innerText = 'Please login to view department dashboard.';
+          return;
+        }
+
+        try {
+          const userDoc = await db.collection('users').doc(user.uid).get();
+          if (!userDoc.exists) {
+            document.getElementById('deptTitle').innerText = '❌ User record not found!';
+            return;
+          }
+          const userData = userDoc.data();
+
+          // prefer deptId from user doc; fallback: localStorage or URL param 'dept'
+          deptId = userData.deptId || userData.departmentId || localStorage.getItem('deptId') || (new URLSearchParams(window.location.search)).get('dept');
+
+          if (!deptId) {
+            document.getElementById('deptTitle').innerText = '⚠️ No deptId linked to this user. Please set deptId in user record.';
+            return;
+          }
+
+          // store locally for convenience & update URL (no visual change)
+          localStorage.setItem('deptId', deptId);
+          try {
+            history.replaceState({}, '', `${location.pathname}?dept=${encodeURIComponent(deptId)}`);
+          } catch (e) {}
+
+          console.log('Resolved deptId:', deptId);
+          fetchDepartmentAndIssues();
+        } catch (err) {
+          console.error('Error loading user:', err);
+          document.getElementById('deptTitle').innerText = 'Error loading user data (see console).';
+        }
+      });
+    }
+
+    // Fetch department doc (tries doc id first, then where('deptId', '==', deptId))
+    async function fetchDepartmentAndIssues() {
+      if (!deptId) {
+        document.getElementById('deptTitle').innerText = 'Department ID missing.';
+        return;
+      }
+
+      try {
+        // Try fetch by doc id
+        let deptSnap = await db.collection('departments').doc(deptId).get();
+        if (!deptSnap.exists) {
+          // fallback: search for deptId field inside documents
+          const q = await db.collection('departments').where('deptId', '==', deptId).get();
+          if (!q.empty) {
+            deptSnap = q.docs[0]; // take first
+          }
+        }
+
+        if (!deptSnap || !deptSnap.exists) {
+          document.getElementById('deptTitle').innerText = '❌ Department not found!';
+          console.warn('Department not found for id:', deptId);
+          // still try to load issues filtered by department field matching deptId
+          await loadIssuesFallback(deptId);
+          return;
+        }
+
+        deptDoc = deptSnap.data();
+        // display name (preserve look)
+        document.getElementById('deptTitle').innerText = `${deptDoc.name || deptDoc.name || deptId} Department`;
+
+        // populate workers if workerIDs present (try to get user docs)
+        await populateWorkers(deptDoc);
+
+        // load issues (primary approach: check common fields)
+        await loadIssues(deptId, deptDoc);
+
+      } catch (err) {
+        console.error('fetchDepartmentAndIssues error:', err);
+        document.getElementById('deptTitle').innerText = 'Error loading department (see console).';
+      }
+    }
+
+    async function populateWorkers(deptData) {
+      try {
+        const tbody = document.getElementById('workersTableBody');
+        tbody.innerHTML = '';
+
+        // If deptData.workers is an array of objects, use it
+        if (Array.isArray(deptData.workers) && deptData.workers.length) {
+          deptData.workers.forEach(w => {
+            tbody.innerHTML += workerRowHtml(w.name || '-', w.role || '-', w.tasks || 0, w.efficiency || 0, w.status || 'offline');
+          });
+          return;
+        }
+
+        // If deptData.workerIDs is array of user ids, fetch them
+        if (Array.isArray(deptData.workerIDs) && deptData.workerIDs.length) {
+          // fetch user docs in batch (firestore doesn't support batch get by array easily; do sequentially)
+          const promises = deptData.workerIDs.map(id => db.collection('users').doc(id).get().catch(e => null));
+          const snaps = await Promise.all(promises);
+
+          snaps.forEach(s => {
+            if (!s || !s.exists) return;
+            const d = s.data();
+            tbody.innerHTML += workerRowHtml(d.name || '-', d.role || '-', d.tasks || 0, d.efficiency || 0, d.status || 'offline');
+          });
+          return;
+        }
+
+        // fallback: no workers info
+        tbody.innerHTML = `<tr><td colspan="5" class="text-gray-500 px-4 py-3">No workers found</td></tr>`;
+      } catch (e) {
+        console.warn('populateWorkers error', e);
+      }
+    }
+
+    function workerRowHtml(name, role, tasks, efficiency, status) {
+      const statusClass = (status === 'online') ? 'text-green-500' : 'text-yellow-500';
+      return `
+        <tr class="odd:bg-gray-50 dark:odd:bg-gray-700 hover:bg-emerald-50 dark:hover:bg-emerald-900 transition-all duration-300 transform hover:scale-[1.01]">
+          <td class="px-4 py-3 font-medium">${name}</td>
+          <td class="px-4 py-3">${role}</td>
+          <td class="px-4 py-3">${tasks}</td>
+          <td class="px-4 py-3">
+            <div class="w-32 bg-gray-200 rounded-full h-2">
+              <div class="bg-emerald-500 h-2 rounded-full" style="width:${efficiency}%"></div>
+            </div>
+            <span class="ml-2 text-emerald-600 font-medium">${efficiency}%</span>
+          </td>
+          <td class="px-4 py-3 ${statusClass} font-semibold">● ${status}</td>
+        </tr>`;
+    }
+
+    // Main issues loader: tries queries commonly used (deptId field, department field), fallback to client-filter
+    async function loadIssues(deptIdParam, deptData) {
+      try {
+        clearMarkers();
+        const issuesTable = document.getElementById('issuesTableBody');
+        issuesTable.innerHTML = '';
+
+        // Try 1: where('deptId', '==', deptIdParam)
+        let qSnap = await db.collection('issues').where('deptId', '==', deptIdParam).get();
+
+        // Try 2 if none: where('department', '==', deptIdParam)
+        if (qSnap.empty) {
+          qSnap = await db.collection('issues').where('department', '==', deptIdParam).get();
+        }
+
+        // Try 3 if none: where('department', '==', deptData.name) (some docs store name)
+        if (qSnap.empty && deptData && deptData.name) {
+          qSnap = await db.collection('issues').where('department', '==', deptData.name).get();
+        }
+
+        // Fallback: get all and filter client-side
+        let docs = [];
+        if (!qSnap.empty) {
+          docs = qSnap.docs;
+        } else {
+          console.warn('No direct query hits; falling back to client-side filter of all issues');
+          const all = await db.collection('issues').get();
+          docs = all.docs.filter(d => {
+            const data = d.data();
+            // check common match patterns:
+            return (data.deptId === deptIdParam) || (data.department === deptIdParam) || (data.department === (deptData && deptData.name));
+          });
+        }
+
+        // Fill UI + markers
+        let activeCount = 0, resolvedCount = 0;
+        let firstLatLng = null;
+        for (const docSnap of docs) {
+          const issue = docSnap.data();
+          const id = docSnap.id;
+          const severity = issue.emergency || issue.severity || 'Low';
+          const status = (issue.status || issue.state || 'open').toString().toLowerCase();
+          const assigned = issue.assignedWorker || issue.assigned || 'Unassigned';
+          const desc = issue.description || issue.title || '';
+
+          if (status === 'resolved' || status === 'completed') resolvedCount++; else activeCount++;
+
+          issuesTable.innerHTML += `
+            <tr class="odd:bg-gray-50 dark:odd:bg-gray-700 hover:bg-emerald-50 dark:hover:bg-emerald-900 transition-all duration-300 transform hover:scale-[1.01]">
+              <td class="px-4 py-3">${id}</td>
+              <td class="px-4 py-3">${desc}</td>
+              <td class="px-4 py-3">${severity}</td>
+              <td class="px-4 py-3">${issue.status || issue.state || 'open'}</td>
+              <td class="px-4 py-3">${assigned}</td>
+              <td class="px-4 py-3 cursor-pointer hover:text-emerald-600 transition">⋮</td>
+            </tr>
+          `;
+
+          const latlng = extractLatLng(issue);
+          if (latlng) {
+            if (!firstLatLng) firstLatLng = latlng;
+            const popup = `<strong>${desc}</strong><br/>Status: ${issue.status || '-'}<br/>Severity: ${severity}`;
+            addMarker(latlng, desc, severity, popup);
+          }
+        }
+
+        document.getElementById('activeIssues').innerText = activeCount;
+        document.getElementById('resolvedIssues').innerText = resolvedCount;
+
+        // Fit map to markers if present
+        if (markers.length > 0) {
+          const bounds = new google.maps.LatLngBounds();
+          markers.forEach(m => bounds.extend(m.getPosition()));
+          map.fitBounds(bounds);
+        } else {
+          // keep default center
+          // map.panTo({ lat: 17.385044, lng: 78.486671 });
+        }
+
+      } catch (err) {
+        console.error('loadIssues error:', err);
+        document.getElementById('issuesTableBody').innerHTML = `<tr><td colspan="6" class="text-red-500 px-4 py-3">Failed to load issues (see console)</td></tr>`;
+      }
+    }
+
+    // fallback attempt to load issues even if dept doc missing
+    async function loadIssuesFallback(deptIdParam) {
+      try {
+        // same as loadIssues but without deptData
+        await loadIssues(deptIdParam, null);
+      } catch (e) {
+        console.warn('fallback loadIssues error', e);
+      }
+    }
+
+    // Start auth watcher after page load
+    document.addEventListener('DOMContentLoaded', () => {
+      initAfterLogin();
+    });
+  </script>
+
+  <!-- Google Maps load (callback -> window.initMap defined above) -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArMM9lWBBGqnMd5j8Bm3jPqUT8MSraGL4&callback=initMap" async defer></script>
+
+</body>
+</html>

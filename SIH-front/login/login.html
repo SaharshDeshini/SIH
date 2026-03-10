@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NagarSeva - Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Lato font -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Slideshow setup */
+    .slideshow {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: fade 15s infinite;
+    }
+    .slide:nth-child(1) {
+      background-image: url('https://scontent.fhyd5-2.fna.fbcdn.net/v/t39.30808-6/307650588_155592150433106_728198001394967897_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=AnMR6odE2gwQ7kNvwFhSwWF&_nc_oc=AdnRBKJAzGAbckYcg7UcbF8674ya1nInoQEvpQUrjP-x-jcHudtCx2DRc3sV0ITxlLw&_nc_zt=23&_nc_ht=scontent.fhyd5-2.fna&_nc_gid=6pNTtACQltq9FgeHZN_AWw&oh=00_AfZK7wdOJ2wYiOXK_QL6RFdmc5WXN_wZpTevfQAP_n0fbw&oe=68C9C8CA');
+      animation-delay: 0s;
+    }
+    .slide:nth-child(2) {
+      background-image: url('https://static.iwmbuzz.com/wp-content/uploads/2022/09/tips-to-suggest-secretary-of-your-building-for-better-and-clean-society-5.jpg');
+      animation-delay: 5s;
+    }
+    .slide:nth-child(3) {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd1ooa-SmVbouAEb1luD8IA-FFFkc3wbPDXg&s');
+      animation-delay: 10s;
+    }
+
+    @keyframes fade {
+      0%   { opacity: 0; }
+      10%  { opacity: 1; }
+      30%  { opacity: 1; }
+      40%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 5;
+    }
+
+    .lato {
+      font-family: 'Lato', sans-serif;
+    }
+  </style>
+</head>
+<body class="h-screen bg-gray-100">
+  <div class="flex h-full">
+    <!-- Left Panel -->
+    <div class="hidden lg:flex w-1/2 justify-center items-center relative overflow-hidden">
+      <div class="slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+      </div>
+      <div class="bg-overlay"></div>
+      <div class="relative z-10 text-center text-white p-8">
+        <h2 class="text-4xl font-bold leading-tight">
+          "Empowering citizens, enabling change: Together we build a better tomorrow."
+        </h2>
+        <p class="mt-4 text-xl font-light">NagarSeva</p>
+      </div>
+    </div>
+
+    <!-- Right Panel (Login Form) -->
+    <div class="flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-12 lato">
+      <div class="w-full max-w-sm p-8 rounded-xl shadow-2xl 
+                  bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl Lato text-gray-800">NagarSeva</h1>
+          <p class="text-gray-700 mt-2">Log in to your account</p>
+        </div>
+        
+        <form class="space-y-6">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-800">Email address</label>
+            <div class="mt-1">
+              <input id="email" name="email" type="email" autocomplete="email" required 
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md 
+                shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+                focus:border-blue-500 sm:text-sm">
+            </div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block text-sm font-medium text-gray-800">Password</label>
+              <div class="text-sm">
+                <a href="#" class="font-medium text-blue-700 hover:text-blue-500">
+                  Forgot password?
+                </a>
+              </div>
+            </div>
+            <div class="mt-1">
+              <input id="password" name="password" type="password" autocomplete="current-password" required 
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md 
+                shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 
+                focus:border-blue-500 sm:text-sm">
+            </div>
+          </div>
+
+          <div>
+            <button type="submit" 
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md 
+              shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 
+              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              Log in
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-800">
+          Empowering citizens. Enabling change.
+        </p>
+
+        <a href="index.html" class="mt-4 block text-center text-sm text-blue-700 hover:text-blue-500 font-medium">
+          ← Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyD45ITDmMxUY7U0fdgFPUaoOoWsx1YoTFI",
+  authDomain: "si-h-9f3e3.firebaseapp.com",
+  projectId: "si-h-9f3e3",
+  storageBucket: "si-h-9f3e3.firebasestorage.app",
+  messagingSenderId: "805584768570",
+  appId: "1:805584768570:web:effa642af8bf47274caf03",
+  measurementId: "G-2CLZB0Z3MZ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const loginForm = document.querySelector('form');
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
+
+  try {
+    // 1️⃣ Sign in
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // 2️⃣ Get Firestore user doc using exact UID (no space!)
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+
+    if (!userDoc.exists()) {
+      alert("User record not found in database!");
+      return;
+    }
+
+    const userData = userDoc.data();
+    const role = userData.role;
+
+    // 3️⃣ Redirect based on role
+    if (role === "superadmin") {
+      window.location.href = "../superadmin/Superadmin_dashboard.html";
+    } else if (role === "dept-admin") {
+      window.location.href = `../department/dashboard.html?dept=${userData.departmentId || ""}`;
+    } else if (role === "worker") {
+      window.location.href = `http://localhost:5174/worker=${userDoc.id}`;
+    } else {
+      window.location.href = "http://localhost:5173/"; // Citizen app
+    }
+
+  } catch (err) {
+    alert("Login failed: " + err.message);
+  }
+});
+</script>
+
+
+
+
+</body>
+</html>
+
+
