@@ -1,0 +1,272 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+/* 🌍 General app styles */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-image: url(./assets/image.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  color: #d4a07200;
+}
+/* 🔐 Logout button */
+.logout-btn {
+  background: linear-gradient(135deg, #5a5454, #5606f5);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(148, 113, 113, 0.4);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(183, 28, 28, 0.5);
+}
+
+.logout-btn:active {
+  transform: scale(0.95);
+}
+
+.app-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 1000;
+  margin: auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2a1938;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 4px rgba(114, 105, 105, 0.15);
+}
+
+.loading {
+  font-size: 1.2rem;
+  color: #555;
+  font-style: italic;
+}
+
+/* 🗺 Map container */
+.map {
+  width: 50%;
+  height: 300px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid #7b858f;
+  transition: transform 0.3s ease;
+}
+.map:hover {
+  transform: scale(1.01);
+}
+
+/* ➕ Report button */
+.report-btn {
+  background: linear-gradient(135deg, #3b4855, #333940);
+  color: white;
+  border: none;
+  margin: 20px;
+  
+  padding: 14px 25px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 15px rgba(25, 118, 210, 0.4);
+}
+.report-btn:hover {
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+  transform: translateY(-3px);
+}
+
+/* 📌 Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* 📦 Modal box */
+.modal {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 460px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #1976d2;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* 📝 Input + mic button */
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 12px 50px 12px 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+textarea:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.4);
+}
+
+.mic-icon {
+  position: absolute;
+  right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+  color: #555;
+}
+.mic-icon:hover {
+  color: #1976d2;
+  transform: scale(1.2);
+}
+
+/* 🎤 Glowing effect while recording */
+.mic-icon.recording {
+  color: red;
+  animation: micPulse 1s infinite;
+}
+@keyframes micPulse {
+  0% {
+    text-shadow: 0 0 4px red;
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 12px red;
+    transform: scale(1.3);
+  }
+  100% {
+    text-shadow: 0 0 4px red;
+    transform: scale(1);
+  }
+}
+
+/* 📂 File upload */
+input[type="file"] {
+  margin: 15px 0;
+  font-size: 0.9rem;
+}
+
+/* 📍 Location */
+.location {
+  font-size: 1rem;
+  background: #f1f8e9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #33691e;
+  font-weight: 500;
+  border: 1px solid #c5e1a5;
+}
+
+/* 🎛 Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.cancel-btn:hover {
+  background: #c62828;
+  transform: translateY(-2px);
+}
+
+.submit-btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background: #2e7d32;
+  transform: translateY(-2px);
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📍 Pulsing Google Maps marker */
+.pulse-marker {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: #1976d2;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(25, 118, 210, 0.4);
+  animation: pulseMarker 2s infinite;
+}
+@keyframes pulseMarker {
+  0% {
+    box-shadow: 0 0 0 0 rgba(25, 118, 210, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(25, 118, 210, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(25, 118, 210, 0);
+  }
+}

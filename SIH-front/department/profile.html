@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Department Administration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-gradient-to-r from-emerald-600 via-teal-500 to-blue-700 dark:from-gray-900 dark:to-gray-800 px-6 py-5 shadow-md">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-white">Department <span class="text-yellow-200 dark:text-green-400">Administration</span></h1>
+        <p class="text-sm text-blue-100 dark:text-gray-400">Admin Profile Section</p>
+      </div>
+      <div class="flex space-x-5 items-center text-white">
+        <button onclick="location.href='dashboard.html'">🏠</button>
+        <button class="relative">🔔<span class="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">3</span></button>
+        <button onclick="location.href='settings.html'">⚙️</button>
+        <button onclick="toggleDarkMode()" id="themeToggle">🌙</button>
+        <button onclick="location.href='dashboard.html'">👤</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="p-6 space-y-6">
+
+    <!-- Profile Card -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow flex items-center justify-between border border-gray-200 dark:border-gray-700">
+      <div class="flex items-center space-x-4">
+        <div class="bg-blue-500 text-white text-2xl font-bold rounded-full h-14 w-14 flex items-center justify-center">JD</div>
+        <div>
+          <h2 class="font-semibold text-lg">John Davidson</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Department Administrator</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">📧 jdavidson@publicworks.gov | ☎️ +1 (555) 123-4567</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">🏢 City Hall, Floor 3, Office 312</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="text-green-500 font-medium">● Online</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Started: Jan 2023</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Last login: 2 hours ago</p>
+      </div>
+    </section>
+
+    <!-- Worker Management -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+      <h2 class="font-semibold mb-4">Worker Management</h2>
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-blue-100 dark:bg-blue-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">24</p>
+          <p class="text-sm text-blue-700 dark:text-blue-300">Active Workers</p>
+        </div>
+        <div class="bg-green-100 dark:bg-green-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">12</p>
+          <p class="text-sm text-green-700 dark:text-green-300">Off Workers</p>
+        </div>
+        <div class="bg-yellow-100 dark:bg-yellow-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">8</p>
+          <p class="text-sm text-yellow-700 dark:text-yellow-300">Scheduled</p>
+        </div>
+      </div>
+
+      <h3 class="font-semibold mb-2">Recent Worker Activity</h3>
+      <ul class="space-y-3">
+        <li class="flex justify-between"><span>John Smith – Field Engineer</span><span class="text-green-500">Online (92%)</span></li>
+        <li class="flex justify-between"><span>Sarah Johnson – Supervisor</span><span class="text-yellow-500">Away (95%)</span></li>
+        <li class="flex justify-between"><span>Mike Davis – Field Worker</span><span class="text-red-500">Busy (88%)</span></li>
+        <li class="flex justify-between"><span>Emily Chen – Safety Coordinator</span><span class="text-green-500">Online (96%)</span></li>
+      </ul>
+    </section>
+
+    <!-- Department Analytics -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+      <h2 class="font-semibold mb-4">Department Analytics</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">89%</p>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Project Success</p>
+        </div>
+        <div class="bg-green-50 dark:bg-green-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">4.2</p>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Avg Response Time</p>
+        </div>
+        <div class="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">156</p>
+          <p class="text-sm text-gray-500 dark:text-gray-300">Issues Resolved</p>
+        </div>
+        <div class="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg text-center">
+          <p class="text-2xl font-bold">94%</p>
+          <p class="text-sm text-gray-500 dark:text-gray-300">SLA Compliance</p>
+        </div>
+      </div>
+
+      <!-- Performance Trends -->
+      <div class="space-y-4">
+        <div>
+          <p class="text-sm font-medium">Issue Resolution</p>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div class="bg-blue-500 h-3 rounded-full" style="width: 89%"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Worker Efficiency</p>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div class="bg-green-500 h-3 rounded-full" style="width: 92%"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Response Time</p>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div class="bg-yellow-500 h-3 rounded-full" style="width: 78%"></div>
+          </div>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Customer Satisfaction</p>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+            <div class="bg-pink-500 h-3 rounded-full" style="width: 96%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Department Settings -->
+    <section class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow border border-gray-200 dark:border-gray-700">
+      <h2 class="font-semibold mb-4">Department Settings</h2>
+      <ul class="space-y-3">
+        <li class="flex justify-between"><span>Auto Assignment</span><span class="text-green-500">Enabled</span></li>
+        <li class="flex justify-between"><span>Email Notifications</span><span class="text-green-500">Enabled</span></li>
+        <li class="flex justify-between"><span>Priority Escalation</span><span class="text-red-500">Disabled</span></li>
+        <li class="flex justify-between"><span>Real-time Updates</span><span class="text-green-500">Enabled</span></li>
+        <li class="flex justify-between"><span>Two-Factor Authentication</span><span class="text-green-500">Enabled</span></li>
+        <li class="flex justify-between"><span>Session Timeout</span><span class="text-gray-500">30 min</span></li>
+        <li class="flex justify-between"><span>API Access</span><span class="text-yellow-500">Restricted</span></li>
+        <li class="flex justify-between"><span>Data Retention</span><span class="text-gray-500">12 months</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-500 dark:text-gray-400">
+    &copy; 2025 Action Minds. All rights reserved.
+  </footer>
+
+  <!-- Dark mode toggle -->
+  <script>
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        btn.textContent = '🌙';
+      } else {
+        html.classList.add('dark');
+        btn.textContent = '🌞';
+      }
+    }
+  </script>
+</body>
+</html>
